@@ -21,9 +21,9 @@ namespace EmployeeManagement.Models
 
         }
 
-        public string GetEmployee(int Id)
+        public Employee GetEmployee(int Id)
         {
-            return _employeesList.FirstOrDefault(f => f.Id == Id).Name;
+            return _employeesList.FirstOrDefault(f => f.Id == Id);
         }
     }
 }

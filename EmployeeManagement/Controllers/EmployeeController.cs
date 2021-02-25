@@ -9,16 +9,24 @@ namespace EmployeeManagement.Controllers
 {
     public class EmployeeController : Controller
     {
-        private EmployeeRepository _employeeRepository;
+        private readonly EmployeeRepository _employeeRepository;
 
-        public EmployeeController(EmployeeRepository employeeRepository)
+        public EmployeeController()
         {
-            _employeeRepository = employeeRepository;
+            _employeeRepository = new EmployeeRepository();
         }
 
         public string Index(int Id)
         {
-            return _employeeRepository.GetEmployee(Id);
+            return _employeeRepository.GetEmployee(Id).Name;
+        }
+
+
+        public JsonResult Datails(int Id)
+        {
+            Employee model = _employeeRepository.GetEmployee(1);
+
+            return Json(model);
         }
     }
 }
