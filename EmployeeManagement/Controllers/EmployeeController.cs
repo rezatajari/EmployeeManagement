@@ -1,9 +1,5 @@
 ﻿using EmployeeManagement.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EmployeeManagement.Controllers
 {
@@ -16,15 +12,16 @@ namespace EmployeeManagement.Controllers
             _employeeRepository = new EmployeeRepository();
         }
 
+        [HttpGet, Route("Employee/Index/{id}")]
         public string Index(int Id)
         {
             return _employeeRepository.GetEmployee(Id).Name;
         }
 
-
+        [HttpGet, Route("Employee/Datails/{id}")]
         public JsonResult Datails(int Id)
         {
-            Employee model = _employeeRepository.GetEmployee(1);
+            Employee model = _employeeRepository.GetEmployee(Id);
 
             return Json(model);
         }

@@ -1,0 +1,15 @@
+﻿@model EmployeeManagement.Models.Employee
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["title"] = "Datails of a employee";
+    
+}
+
+
+@Html.LabelForModel(Model.Name)
+<br />
+@Html.LabelForModel(Model.Email)
+<br />
+@Html.LabelForModel(Model.Department)
