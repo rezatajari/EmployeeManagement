@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeManagement.Controllers
 {
+    [Route("Employee")]
     public class EmployeeController : Controller
     {
         private readonly EmployeeRepository _employeeRepository;
@@ -12,18 +13,19 @@ namespace EmployeeManagement.Controllers
             _employeeRepository = new EmployeeRepository();
         }
 
-        [HttpGet, Route("Employee/Index/{id}")]
-        public string Index(int Id)
+        [HttpGet, Route("Index")]
+        public ViewResult Index()
         {
-            return _employeeRepository.GetEmployee(Id).Name;
+            Employee employee = new Employee();
+            return View(employee);
         }
 
-        [HttpGet, Route("Employee/Datails/{id}")]
-        public JsonResult Datails(int Id)
+        [HttpGet, Route("Datails/{id}")]
+        public ViewResult Datails(int Id)
         {
             Employee model = _employeeRepository.GetEmployee(Id);
 
-            return Json(model);
+            return View(model);
         }
     }
 }
