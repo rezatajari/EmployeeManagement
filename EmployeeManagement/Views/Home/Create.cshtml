@@ -1,0 +1,22 @@
+﻿@model Employee
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "Create Employee";
+}
+
+<form asp-action="Create" asp-controller="Home" method="post">
+    <div>
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" />
+    </div>
+    <div>
+        <label asp-for="Email">Email Address</label>
+        <input asp-for="Email" />
+    </div>
+    <div>
+        <label asp-for="Department">Department Type</label>
+        <select asp-for="Department" asp-items="Html.GetEnumSelectList<Dept>()"></select>
+    </div>
+</form>

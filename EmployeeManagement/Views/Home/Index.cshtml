@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Employee>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["title"] = "Index";
+}
+
+<div class="row justify-content-center">
+    @foreach (var employee in Model)
+    {
+        <div class="card m-3" >
+            <div class="bg-dark card">
+                <div class="card-header">
+                    <h3>@employee.Name</h3>
+                </div>
+
+                <img src="~/Images/download.jpg" class="card-img-top" asp-append-version="true" />
+                <div class="card-footer text-center">
+                    <a class="btn btn-primary m-1" asp-action="Datails" asp-controller="Home" asp-route-id="@employee.Id">View</a>
+                    <a class="btn btn-warning m-1" asp-action="Datails" asp-controller="Home" asp-route-id="@employee.Id">Edit</a>
+                    <a class="btn btn-danger  m-1" asp-action="Datails" asp-controller="Home" asp-route-id="@employee.Id">Delete</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
