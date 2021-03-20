@@ -20,7 +20,10 @@
     </div>
     <div class="form-group">
         <label asp-for="Department">Department Type</label>
-        <select asp-for="Department" asp-items="Html.GetEnumSelectList<Dept>()" class="form-control"></select>
+        <select asp-for="Department" asp-items="Html.GetEnumSelectList<Dept>()" class="form-control">
+            <option value="">Please Select</option>
+        </select>
+        <span asp-validation-for="Department" class="text-danger"></span>
     </div>
     <div>
         <button class="bg-primary border-0 p-2 rounded" type="submit">Create</button>

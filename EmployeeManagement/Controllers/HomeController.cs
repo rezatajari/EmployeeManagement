@@ -10,11 +10,11 @@ namespace EmployeeManagement.Controllers
     [Route("Home")]
     public class HomeController : Controller
     {
-        private readonly EmployeeRepository _employeeRepository;
+        private readonly IEmployeeRepository _employeeRepository;
 
-        public HomeController()
+        public HomeController(IEmployeeRepository employeeRepository)
         {
-            _employeeRepository = new EmployeeRepository();
+            _employeeRepository = employeeRepository;
         }
 
         [HttpGet, Route("Index")]
@@ -27,7 +27,7 @@ namespace EmployeeManagement.Controllers
                 _employeeRepository.GetEmployee(3)
             };
             return View(employees);
-        }   
+        }
 
         [HttpGet, Route("Datails/{id}")]
         public ViewResult Datails(int Id)
@@ -37,7 +37,7 @@ namespace EmployeeManagement.Controllers
             return View(model);
         }
 
-        [HttpGet,Route("Create")]
+        [HttpGet, Route("Create")]
         public ViewResult Create()
         {
             return View();
