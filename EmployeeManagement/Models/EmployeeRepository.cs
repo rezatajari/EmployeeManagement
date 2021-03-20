@@ -11,19 +11,25 @@ namespace EmployeeManagement.Models
 
         public EmployeeRepository()
         {
-            _employeesList = new List<Employee>
+            _employeesList = new List<Employee>()
             {
-                new Employee{ Id=1,Name="Reza",Email="Reza@gmail.com",Department=Dept.HR},
-                new Employee{ Id=2,Name="Ali",Email="Ali@gmail.com",Department=Dept.IT},
-                new Employee{ Id=3,Name="Mohammad",Email="Mohammad@gmail.com",Department=Dept.None},
-                new Employee{ Id=4,Name="Ehsan",Email="Ehsan@gmail.com",Department=Dept.Payroll}
+                new Employee(){ Id=1,Name="Reza",Email="Reza@gmail.com",Department=Dept.HR},
+                new Employee(){ Id=2,Name="Ali",Email="Ali@gmail.com",Department=Dept.IT},
+                new Employee(){ Id=3,Name="Mohammad",Email="Mohammad@gmail.com",Department=Dept.None},
+                new Employee(){ Id=4,Name="Ehsan",Email="Ehsan@gmail.com",Department=Dept.Payroll}
             };
-
         }
 
         public Employee GetEmployee(int Id)
         {
             return _employeesList.FirstOrDefault(f => f.Id == Id);
+        }
+
+        public Employee Add(Employee employee)
+        {
+            employee.Id = _employeesList.Max(i => i.Id) + 1;
+            _employeesList.Add(employee);
+            return employee;
         }
     }
 }

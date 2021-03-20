@@ -27,9 +27,9 @@ namespace EmployeeManagement.Controllers
                 _employeeRepository.GetEmployee(3)
             };
             return View(employees);
-        }
+        }   
 
-        [HttpGet, Route("Datails")]
+        [HttpGet, Route("Datails/{id}")]
         public ViewResult Datails(int Id)
         {
             Employee model = _employeeRepository.GetEmployee(Id);
@@ -37,9 +37,21 @@ namespace EmployeeManagement.Controllers
             return View(model);
         }
 
-        [HttpGet, Route("Create")]
+        [HttpGet,Route("Create")]
         public ViewResult Create()
         {
+            return View();
+        }
+
+        [HttpPost, Route("Create")]
+        public IActionResult Create(Employee employee)
+        {
+            if (ModelState.IsValid)
+            {
+                Employee newEmploye = _employeeRepository.Add(employee);
+                return RedirectToAction("Datails", new { id = newEmploye.Id });
+            };
+
             return View();
         }
     }
