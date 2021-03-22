@@ -16,10 +16,10 @@
                     <h3>@employee.Name</h3>
                 </div>
 
-                <img src="@photoEmployee" class="card-img-top" style="height:300px;" asp-append-version="true" />
+                <img src="@photoEmployee" class="card-img-top" style="height:300px; width:auto;" asp-append-version="true" />
                 <div class="card-footer text-center">
                     <a class="btn btn-primary m-1" asp-action="Datails" asp-controller="Home" asp-route-id="@employee.Id">View</a>
-                    <a class="btn btn-warning m-1" asp-action="Update" asp-controller="Home" asp-route-id="@employee.Id">Update</a>
+                    <a class="btn btn-warning m-1" asp-action="Edit" asp-controller="Home" asp-route-id="@employee.Id">Edit</a>
                     <a class="btn btn-danger  m-1" asp-action="Delete" asp-controller="Home" asp-route-id="@employee.Id">Delete</a>
                 </div>
             </div>

@@ -8,17 +8,17 @@
 
 }
 
-    <div class="card m-3">
-        <div class="bg-dark card">
-            <div class="card-header">
-                <h3>@Model.Name</h3>
-            </div>
+<div class="card m-3">
+    <div class="bg-dark card">
+        <div class="card-header">
+            <h3>@Model.Name</h3>
+        </div>
 
-            <img src="@photoEmployee" class="card-img-top" style="height:600px;" asp-append-version="true" />
-            <div class="card-footer text-center">
-                <a class="btn btn-primary m-1" asp-action="Datails" asp-controller="Home" asp-route-id="@Model.Id">View</a>
-                <a class="btn btn-warning m-1" asp-action="Update" asp-controller="Home" asp-route-id="@Model.Id">Update</a>
-                <a class="btn btn-danger  m-1" asp-action="Delete" asp-controller="Home" asp-route-id="@Model.Id">Delete</a>
-            </div>
+        <img src="@photoEmployee" class="card-img-top" style="height:600px;width:auto;" asp-append-version="true" />
+        <div class="card-footer text-center">
+            <a class="btn btn-primary m-1" asp-action="Datails" asp-controller="Home" asp-route-id="@Model.Id">View</a>
+            <a class="btn btn-warning m-1" asp-action="Edit" asp-controller="Home" asp-route-id="@Model.Id">Edit</a>
+            <a class="btn btn-danger  m-1" asp-action="Delete" asp-controller="Home" asp-route-id="@Model.Id">Delete</a>
         </div>
     </div>
+</div>

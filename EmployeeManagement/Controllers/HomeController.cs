@@ -31,6 +31,23 @@ namespace EmployeeManagement.Controllers
             return View(employees);
         }
 
+        [HttpGet, Route("Edit/{id}")]
+        public ViewResult Edit(int Id)
+        {
+            Employee employee = _employeeRepository.GetEmployee(Id);
+
+            EditEmployeeViewModel editEmployeeViewModel = new()
+            {
+                Id = employee.Id,
+                Name = employee.Name,
+                Email = employee.Email,
+                Department = employee.Department,
+                PathPhoto = employee.PhotoPath
+            };
+
+            return View(editEmployeeViewModel);
+        }
+
         [HttpGet, Route("Datails/{id}")]
         public ViewResult Datails(int Id)
         {
