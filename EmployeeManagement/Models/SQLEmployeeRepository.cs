@@ -24,7 +24,10 @@ namespace EmployeeManagement.Models
         {
             Employee employee = _context.Employees.Find(Id);
             if (employee != null)
+            {
                 _context.Employees.Remove(employee);
+                _context.SaveChanges();
+            }
             else
                 throw new Exception("Your Employee is not exist");
 
@@ -53,6 +56,8 @@ namespace EmployeeManagement.Models
                 employee.Name = changeEmployee.Name;
                 employee.Email = changeEmployee.Email;
                 employee.Department = changeEmployee.Department;
+                _context.Employees.Update(employee);
+                _context.SaveChanges();
             }
             else
                 throw new Exception("Your Employee is not exist");

@@ -48,6 +48,34 @@ namespace EmployeeManagement.Controllers
             return View(editEmployeeViewModel);
         }
 
+        [HttpPost, Route("Edit/{id}")]
+        public IActionResult Edit(EditEmployeeViewModel updateModel)
+        {
+            if (ModelState.IsValid)
+            {
+                Employee employee = _employeeRepository.GetEmployee(updateModel.Id);
+                employee.Name = updateModel.Name;
+                employee.Email = updateModel.Email;
+                employee.Department = updateModel.Department;
+                if (updateModel.Photo != null)
+                {
+                    if (updateModel.PathPhoto != null)
+                    {
+                        string pathFile = Path.Combine(_hostingEnvironment.WebRootPath,
+                            "Images", updateModel.PathPhoto);
+                        System.IO.File.Delete(pathFile);
+                    }
+                    employee.PhotoPath = ProcessFileUpload(updateModel.Photo);
+                };
+
+                _employeeRepository.Update(employee);
+
+                return RedirectToAction("Index");
+            }
+            else
+                throw new Exception("Your Employee is not exist");
+        }
+
         [HttpGet, Route("Datails/{id}")]
         public ViewResult Datails(int Id)
         {
@@ -67,17 +95,7 @@ namespace EmployeeManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                string uniqueFileName = null;
-                if (employeeModel.Photos != null && employeeModel.Photos.Count > 0)
-                {
-                    foreach (IFormFile Photo in employeeModel.Photos)
-                    {
-                        string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images");
-                        uniqueFileName = Guid.NewGuid().ToString() + "_" + Photo.FileName;
-                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                        Photo.CopyTo(new FileStream(filePath, FileMode.Create));
-                    }
-                }
+                string uniqueFileName = ProcessFileUpload(employeeModel.Photo);
 
                 var newEmploye = new Employee
                 {
@@ -86,13 +104,29 @@ namespace EmployeeManagement.Controllers
                     Department = employeeModel.Department,
                     PhotoPath = uniqueFileName
                 };
-                _employeeRepository.Add(newEmploye);
 
+                _employeeRepository.Add(newEmploye);
                 return RedirectToAction("Datails", new { id = newEmploye.Id });
-            };
+            }
 
             return View();
+
         }
 
+        private string ProcessFileUpload(IFormFile photoFile)
+        {
+            string uniqueFileName = null;
+            if (photoFile != null)
+            {
+                string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + photoFile.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using var fileStream = new FileStream(filePath, FileMode.Create);
+                photoFile.CopyTo(fileStream);
+            }
+
+            return uniqueFileName;
+        }
     }
+
 }
