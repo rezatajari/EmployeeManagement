@@ -1,15 +1,15 @@
-﻿using System;
+﻿using EmployeeManagement.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
-namespace EmployeeManagement.Models
+namespace EmployeeManagement.ViewModels
 {
-    public class Employee
+    public class CreateEmployeeViewModel
     {
-        public int Id { get; set; }
-
         [Required]
         [MaxLength(50, ErrorMessage = "Name cannot exceed 50 characters")]
         public string Name { get; set; }
@@ -23,6 +23,6 @@ namespace EmployeeManagement.Models
         [Required]
         public Dept Department { get; set; }
 
-        public string PhotoPath { get; set; }
+        public IFormFile Photo { get; set; }
     }
 }

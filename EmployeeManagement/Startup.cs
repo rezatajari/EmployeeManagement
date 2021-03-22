@@ -28,7 +28,7 @@ namespace EmployeeManagement
                 options => options.UseSqlServer(Configuration.GetConnectionString("EmployeeDBConnection")));
 
             services.AddControllersWithViews();
-            services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

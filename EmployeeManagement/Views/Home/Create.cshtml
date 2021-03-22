@@ -1,4 +1,4 @@
-﻿@model Employee
+﻿@model EmployeeManagement.ViewModels.CreateEmployeeViewModel
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -6,7 +6,7 @@
     ViewBag.Title = "Create Employee";
 }
 
-<form asp-action="Create" asp-controller="Home" method="post" class="bg-info p-5 w-50 rounded" style="margin-top:25vh; margin-left:20vw;">
+<form enctype="multipart/form-data" asp-action="Create" asp-controller="Home" method="post" class="bg-info p-5 w-50 rounded" style="margin-top:25vh; margin-left:20vw;">
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group">
         <label asp-for="Name">Name</label>
@@ -25,7 +25,27 @@
         </select>
         <span asp-validation-for="Department" class="text-danger"></span>
     </div>
+    <div class="form-group">
+        <label asp-for="Photo"></label>
+        <div class="custom-file">
+            <input asp-for="Photo" type="file" class="custom-file-input">
+            <label class="custom-file-label">Choose file</label>
+        </div>
+    </div>
     <div>
         <button class="bg-primary border-0 p-2 rounded" type="submit">Create</button>
     </div>
+
+
+    @section Scripts{
+        <script>
+            $(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).next('.custom-file-label').html(fileName);
+                });
+            });
+        </script>
+
+    }
 </form>

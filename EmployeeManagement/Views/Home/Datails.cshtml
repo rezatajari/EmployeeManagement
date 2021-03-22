@@ -4,25 +4,21 @@
 *@
 @{
     ViewData["title"] = "Datails";
+    var photoEmployee = "~/Images/" + (Model.PhotoPath ?? "download.jpg");
 
 }
 
-<div class="row">
-    <ul class="list-group-item-info col-4">
-        <li class="nav-link d-flex">
-            <h5 class="mr-2">Name:</h5>
-            <h5>@Model.Name</h5>
-        </li>
-        <li class="nav-link d-flex">
-            <h5 class="mr-2">Email:</h5>
-            <h5>@Model.Email</h5>
-        </li>
-        <li class="nav-link d-flex">
-            <h5 class="mr-2">Department:</h5>
-            <h5>@Model.Department</h5>
-        </li>
-        <li class="nav-link d-flex">
-            <a class="btn btn-danger" asp-action="Index" asp-controller="Home">Back To Employee List</a>
-        </li>
-    </ul>
-</div>
+    <div class="card m-3">
+        <div class="bg-dark card">
+            <div class="card-header">
+                <h3>@Model.Name</h3>
+            </div>
+
+            <img src="@photoEmployee" class="card-img-top" style="height:600px;" asp-append-version="true" />
+            <div class="card-footer text-center">
+                <a class="btn btn-primary m-1" asp-action="Datails" asp-controller="Home" asp-route-id="@Model.Id">View</a>
+                <a class="btn btn-warning m-1" asp-action="Update" asp-controller="Home" asp-route-id="@Model.Id">Update</a>
+                <a class="btn btn-danger  m-1" asp-action="Delete" asp-controller="Home" asp-route-id="@Model.Id">Delete</a>
+            </div>
+        </div>
+    </div>

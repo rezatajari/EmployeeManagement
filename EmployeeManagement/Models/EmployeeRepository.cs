@@ -20,6 +20,11 @@ namespace EmployeeManagement.Models
             };
         }
 
+        public List<Employee> GetAllEmployees()
+        {
+            return _employeesList;
+        }
+
         public Employee GetEmployee(int Id)
         {
             return _employeesList.FirstOrDefault(f => f.Id == Id);
@@ -29,6 +34,34 @@ namespace EmployeeManagement.Models
         {
             employee.Id = _employeesList.Max(i => i.Id) + 1;
             _employeesList.Add(employee);
+            return employee;
+        }
+
+        public Employee Delete(int Id)
+        {
+            Employee employee = _employeesList.FirstOrDefault(i => i.Id == Id);
+
+            if (employee != null)
+                _employeesList.Remove(employee);
+            else
+                throw new Exception("Your Employee is not exist");
+
+            return employee;
+        }
+
+        public Employee Update(Employee changeEmployee)
+        {
+            Employee employee = _employeesList.FirstOrDefault(i => i.Id == changeEmployee.Id);
+
+            if (employee != null)
+            {
+                employee.Name = changeEmployee.Name;
+                employee.Email = changeEmployee.Email;
+                employee.Department = changeEmployee.Department;
+            }
+            else
+                throw new Exception("Your Employee is not exist");
+
             return employee;
         }
     }
