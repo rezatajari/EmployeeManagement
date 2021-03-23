@@ -41,11 +41,7 @@ namespace EmployeeManagement.Models
 
         public Employee GetEmployee(int Id)
         {
-            Employee employee = _context.Employees.Find(Id);
-            if (employee != null)
-                return employee;
-            else
-                throw new Exception("Your Emoloyee is not exist");
+            return _context.Employees.Find(Id);
         }
 
         public Employee Update(Employee changeEmployee)

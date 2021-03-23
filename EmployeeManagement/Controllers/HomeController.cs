@@ -81,6 +81,12 @@ namespace EmployeeManagement.Controllers
         {
             Employee model = _employeeRepository.GetEmployee(Id);
 
+            if (model == null) {
+
+                Response.StatusCode = 404;
+                return View("EmployeeIsNotExist", Id);
+            }
+
             return View(model);
         }
 
