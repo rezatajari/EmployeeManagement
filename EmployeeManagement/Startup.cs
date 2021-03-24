@@ -40,7 +40,7 @@ namespace EmployeeManagement
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseStatusCodePagesWithReExecute("/Home/Error/{0}");
             }
             app.UseStaticFiles();
 

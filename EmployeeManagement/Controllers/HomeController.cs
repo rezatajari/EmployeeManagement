@@ -81,7 +81,8 @@ namespace EmployeeManagement.Controllers
         {
             Employee model = _employeeRepository.GetEmployee(Id);
 
-            if (model == null) {
+            if (model == null)
+            {
 
                 Response.StatusCode = 404;
                 return View("EmployeeIsNotExist", Id);
@@ -118,6 +119,20 @@ namespace EmployeeManagement.Controllers
             return View();
 
         }
+
+        [Route("Error/{statusCode}")]
+        public ViewResult ErrorHandler(int statusCode)
+        {
+            switch (statusCode)
+            {
+                case 404:
+                    ViewBag.ErrorMessage = "This url is not exist";
+                    break;
+            }
+
+            return View("NotFound");
+        }
+
 
         private string ProcessFileUpload(IFormFile photoFile)
         {
