@@ -3,6 +3,7 @@ using EmployeeManagement.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,12 +17,15 @@ namespace EmployeeManagement.Controllers
     {
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly ILogger<HomeController> _logger;
 
         public HomeController(IEmployeeRepository employeeRepository,
-                               IWebHostEnvironment hostingEnvironment)
+                              IWebHostEnvironment hostingEnvironment,
+                              ILogger<HomeController> logger)
         {
             _employeeRepository = employeeRepository;
             _hostingEnvironment = hostingEnvironment;
+            _logger = logger;
         }
 
         [HttpGet, Route("Index")]
@@ -83,7 +87,6 @@ namespace EmployeeManagement.Controllers
 
             if (model == null)
             {
-
                 Response.StatusCode = 404;
                 return View("EmployeeIsNotExist", Id);
             }
