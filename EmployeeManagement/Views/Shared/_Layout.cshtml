@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@inject SignInManager<IdentityUser> signInManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -26,9 +27,25 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" asp-action="register" asp-controller="account">Register</a>
-                    </li>
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <form asp-action="Logout" asp-controller="Account" method="post">
+                                <button type="submit" class="nav-link btn btn-link py-0" style="width:auto">
+                                    Lougout @User.Identity.Name
+                                </button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="Register" asp-controller="Account">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="Login" asp-controller="Account">Login</a>
+                        </li>
+                    }
                 </ul>
             </div>
         </nav>

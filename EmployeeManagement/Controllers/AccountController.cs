@@ -46,5 +46,12 @@ namespace EmployeeManagement.Controllers
 
             return View(registerMode);
         }
+
+        [HttpPost, Route("Logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
