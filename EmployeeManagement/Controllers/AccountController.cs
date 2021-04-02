@@ -27,12 +27,12 @@ namespace EmployeeManagement.Controllers
         }
 
         [HttpPost, Route("Register")]
-        public async Task<IActionResult> Register(RegisterViewModel registerMode)
+        public async Task<IActionResult> Register(RegisterViewModel registerModel)
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser() { UserName = registerMode.Email, Email = registerMode.Email };
-                var result = await _userManager.CreateAsync(user, registerMode.Password);
+                var user = new IdentityUser() { UserName = registerModel.Email, Email = registerModel.Email };
+                var result = await _userManager.CreateAsync(user, registerModel.Password);
 
                 if (result.Succeeded)
                 {
@@ -44,7 +44,31 @@ namespace EmployeeManagement.Controllers
                     ModelState.AddModelError("", error.Description);
             }
 
-            return View(registerMode);
+            return View(registerModel);
+        }
+
+        [HttpGet, Route("Login")]
+        public ViewResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost, Route("Login")]
+        public async Task<IActionResult> Login(LoginViewModel loginModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(loginModel.Email,
+                                                                      loginModel.Password,
+                                                                      loginModel.RememberMe, false);
+
+                if (result.Succeeded)
+                    return RedirectToAction("Index", "Home");
+
+                ModelState.AddModelError(string.Empty, "Invalid Login Attemp");
+            }
+
+            return View();
         }
 
         [HttpPost, Route("Logout")]
