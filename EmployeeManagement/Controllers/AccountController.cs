@@ -1,4 +1,5 @@
 ﻿using EmployeeManagement.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -21,12 +22,14 @@ namespace EmployeeManagement.Controllers
             _signInManager = signInManager;
         }
         [HttpGet, Route("Register")]
+        [AllowAnonymous]
         public ViewResult Register()
         {
             return View();
         }
 
         [HttpPost, Route("Register")]
+        [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterViewModel registerModel)
         {
             if (ModelState.IsValid)
@@ -48,12 +51,14 @@ namespace EmployeeManagement.Controllers
         }
 
         [HttpGet, Route("Login")]
+        [AllowAnonymous]
         public ViewResult Login()
         {
             return View();
         }
 
         [HttpPost, Route("Login")]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel loginModel)
         {
             if (ModelState.IsValid)
