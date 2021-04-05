@@ -28,6 +28,19 @@ namespace EmployeeManagement.Controllers
             return View();
         }
 
+        [AcceptVerbs("GET", "POST")]
+        [AllowAnonymous]
+        public async Task<IActionResult> EmailIsChack(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user == null)
+                return Json(true);
+            else
+                return Json($"This {email} is alredy exist");
+        }
+
+
         [HttpPost, Route("Register")]
         [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterViewModel registerModel)
